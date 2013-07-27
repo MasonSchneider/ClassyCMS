@@ -100,7 +100,7 @@ tinymce.init({
     </div>
     <div class="row">
     	<div style="text-align:center" class="span12">
-            <button type="submit" name="submit" class="btn btn-large btn-primary">Save</button> <a href="fields.php" class="btn btn-large">Cancel</a>
+            <button type="submit" name="submit" class="btn btn-large btn-primary">Create</button> <a href="fields.php" class="btn btn-large">Cancel</a>
         </div>
     </div>
 </form>

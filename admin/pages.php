@@ -73,7 +73,7 @@
     </div>
     <br />
     <div class="row">
-    	<div class="span8">
+    	<div class="span12">
             <table class="table table-bordered table-hover table-striped">
                 <thead>
                     <tr>
