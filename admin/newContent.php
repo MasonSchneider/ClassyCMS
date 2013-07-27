@@ -73,7 +73,7 @@ tinymce.init({
       <a class="brand" href="panel.php">Classy CMS</a>
       <ul class="nav">
         <li><a href="panel.php"><i class="icon-home icon-white"></i> Home</a></li>
-        <li><a href="#"><i class="icon-briefcase icon-white"></i> Pages</a></li>
+        <li><a href="pages.php"><i class="icon-briefcase icon-white"></i> Pages</a></li>
         <li class="active"><a href="fields.php"><i class="icon-edit icon-white"></i> Fields</a></li>
         <li><a href="#"><i class="icon-folder-open icon-white"></i> Media</a></li>
         <li><a href="#"><i class="icon-user icon-white"></i> Users</a></li>

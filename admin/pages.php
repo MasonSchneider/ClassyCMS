@@ -10,7 +10,7 @@
 <html>
 
 <head>
-<title>Classy CMS Fields</title>
+<title>Classy CMS Pages</title>
 <!-- Bootstrap -->
 <link href="bootstrap/css/bootstrap.css" rel="stylesheet" media="screen">    
 <script src="http://code.jquery.com/jquery-latest.js"></script>
@@ -30,8 +30,8 @@
       <a class="brand" href="panel.php">Classy CMS</a>
       <ul class="nav">
         <li><a href="panel.php"><i class="icon-home icon-white"></i> Home</a></li>
-        <li><a href="pages.php"><i class="icon-briefcase icon-white"></i> Pages</a></li>
-        <li class="active"><a href="fields.php"><i class="icon-edit icon-white"></i> Fields</a></li>
+        <li class="active"><a href="pages.php"><i class="icon-briefcase icon-white"></i> Pages</a></li>
+        <li><a href="fields.php"><i class="icon-edit icon-white"></i> Fields</a></li>
         <li><a href="#"><i class="icon-folder-open icon-white"></i> Media</a></li>
         <li><a href="#"><i class="icon-user icon-white"></i> Users</a></li>
         <li><a href="settings.php"><i class="icon-wrench icon-white"></i> Settings</a></li>
@@ -44,34 +44,26 @@
 <div class="container">
 	<div class="row">
     	<div class="span3">
-            <a href="#" onClick="alert('These fields hold your website\'s content.'); return false;" class="thumbnail">
-                <img alt="Classy CMS" style="width:300px; height:200px;" src="images/Fields.png">
+            <a href="#" onClick="alert('These pages are used to organize your fields .'); return false;" class="thumbnail">
+                <img alt="Classy CMS" style="width:300px; height:200px;" src="images/Pages.png">
             </a>
         </div>
         <div class="span8 offset1">
             <br />
             <br />
             <div class="btn-group">
-                <a href="newField.php?type=1" class="btn btn-large btn-success span3">New Field</a>
-                <button class="btn dropdown-toggle btn-large btn-success" data-toggle="dropdown">
-                <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu">
-                    <li><a tabindex="-1" href="newField.php?type=1">Content</a></li>
-                    <li class="disabled"><a tabindex="-1" href="#">Title</a></li>
-                    <li class="disabled"><a tabindex="-1" href="#">Media</a></li>
-                </ul>
+                <a href="newPage.php" class="btn btn-large btn-success span3">New Page</a>
             </div>
             <br />
             <br />
-            <div class="btn-group"><a href="#info" data-toggle="modal" class="btn btn-large span4 btn-info">Information about using fields</a></div>
+            <div class="btn-group"><a href="#info" data-toggle="modal" class="btn btn-large span3 btn-info">Information about pages</a></div>
             <div id="info" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h3 id="myModalLabel">Field Info</h3>
+                    <h3 id="myModalLabel">Page Info</h3>
                     </div>
                     <div class="modal-body">
-                    <p>Fields are used on your website to display content. <br />Add classy-field-"FIELD NAME" to the class of an html element and classy will fill that element with the field you've named!</p>
+                    <p>Classy's pages are used to organize fields based on where they appear on your website, making it easier to know what field to edit.</p>
                     </div>
                     <div class="modal-footer">
                     <button class="btn btn-primary" data-dismiss="modal">Close</button>
@@ -81,21 +73,19 @@
     </div>
     <br />
     <div class="row">
-    	<div class="span12">
+    	<div class="span8">
             <table class="table table-bordered table-hover table-striped">
                 <thead>
                     <tr>
                         <th style="text-align:center"></th>
-                        <th style="text-align:center">Field</th>
-                        <th style="text-align:center">Type</th>
-                      <th style="text-align:center">Preview</th>
+                        <th style="text-align:center">Page</th>
                         <th style="text-align:center">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
 						$db = new PDO('mysql:host='.$dbHost.';dbname='.$dbName, $dbUser, $dbPass);
-						$all = $db->prepare("SELECT * FROM classyFields ORDER BY id ASC");
+						$all = $db->prepare("SELECT * FROM classyPages ORDER BY id ASC");
 						$all->execute();
 						$i = 1;
 						if($all->rowCount() > 0) {
@@ -104,20 +94,8 @@
 								print '<tr>';
 								print '<td style="text-align:center">'.$i.'</td>';
 								$i++;
-                       			print '<td style="text-align:center">'.$row['name'].'</td>';
-								switch($row['type']) {
-									case 1:
-										print '<td style="text-align:center">Content</td>';
-										break;
-									case 2:
-										print '<td style="text-align:center">Title</td>';
-										break;
-									case 3:
-										print '<td style="text-align:center">Media</td>';
-										break;
-								}
-                        		print '<td style="text-align:center">'.substr(htmlspecialchars($row['content']),0,100).'</td>';
-								print '<td style="text-align:center"><a href="editField.php?id='.$row['id'].'&type='.$row['type'].'"><i class="icon-edit"></i></a> | <a   onClick="var y = confirm(\'You are about to delete the field '.$row['name'].'.\'); if(y == true) return true; else return false; " href="deleteField.php?id='.$row['id'].'"><i class="icon-remove"></i></a></td>';
+                       			print '<td style="text-align:center"><b>'.$row['name'].'</b></td>';
+								print '<td style="text-align:center"><a href="editPage.php?id='.$row['id'].'"><i class="icon-edit"></i></a> | <a   onClick="var y = confirm(\'You are about to delete the page '.$row['name'].'.\'); if(y == true) return true; else return false; " href="deletePage.php?id='.$row['id'].'"><i class="icon-remove"></i></a></td>';
 								print '</tr>';
 							}
 						}

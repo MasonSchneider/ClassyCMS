@@ -39,7 +39,8 @@
 				// Create Tables
 				$db->exec('CREATE TABLE `classyUsers` (`id` INT NOT NULL AUTO_INCREMENT ,`username` VARCHAR( 50 ) NOT NULL ,`password` VARCHAR( 50 ) NOT NULL ,`email` VARCHAR( 50 ) NOT NULL ,`priv` INT NOT NULL ,PRIMARY KEY ( `id` ))');
 				$db->exec('CREATE TABLE `classyFields` (`id` INT NOT NULL AUTO_INCREMENT ,`name` VARCHAR( 50 ) NOT NULL ,`type` INT NOT NULL ,`content` TEXT NOT NULL ,PRIMARY KEY ( `id` ))');
-				
+				$db->exec('CREATE TABLE `classyPages` (`id` INT NOT NULL AUTO_INCREMENT ,`name` VARCHAR( 50 ) NOT NULL ,`fields` TEXT NOT NULL ,`createdAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL , PRIMARY KEY ( `id` ))');
+
 				header('Location: settings.php');
 				exit;
 				
