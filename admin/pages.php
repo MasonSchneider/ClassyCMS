@@ -91,7 +91,7 @@
 						if($all->rowCount() > 0) {
 							$allRows = $all->fetchAll(PDO::FETCH_BOTH);
 							foreach($allRows as $row) {
-								print '<tr>';
+								print '<tr style="cursor: pointer;" onClick="window.location = \'viewPage.php?id='.$row['id'].'\'">';
 								print '<td style="text-align:center">'.$i.'</td>';
 								$i++;
                        			print '<td style="text-align:center"><b>'.$row['name'].'</b></td>';

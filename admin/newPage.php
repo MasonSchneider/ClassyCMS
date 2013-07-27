@@ -7,7 +7,16 @@
     require_once('constants.php');
 	if(isset($_POST['submit'])) {
 		$name = $_POST['name'];
+        $fields = $_POST['fields'];
 		$db = new PDO('mysql:host='.$dbHost.';dbname='.$dbName, $dbUser, $dbPass);
+        if(!empty($name) && !empty($fields)) {
+            $insert = $db->prepare("INSERT INTO classyPages (name, fields) VALUES (?, ?)");
+            $insert->execute(array($name, serialize($fields)));
+            header("Location: pages.php");
+            exit;
+        } else {
+            $error = '<p><span class="label label-important">You must provide a name and select at least one field for a page.</span></p>';
+        }
 	}
 ?>
 <!DOCTYPE html>
@@ -93,11 +102,11 @@
 </div>
 <div class="container">
 <form action="newPage.php" method="post">
-	<legend><h1>New Page</h1></legend> 
-    <?php if(isset($error)) echo $error; ?>
+	<legend><h1>New Page</h1></legend>
 	<div class="row">
         <div style="text-align:center" class="span12">
 			<input maxlength="50" type="text" placeholder="Page Name" name="name" id="name" value="<?php if(isset($name)) echo $name; ?>">
+            <?php if(isset($error)) echo $error; ?>
         </div>
     </div>
     <div class="row">
@@ -123,7 +132,11 @@
                                 $allRows = $all->fetchAll(PDO::FETCH_BOTH);
                                 foreach($allRows as $row) {
                                     print '<tr>';
-                                    print '<td style="text-align:center"><input type="checkbox" name="fields" value="'.$row['id'].'"></td>';
+                                    if(isset($fields) && in_array($row['id'], $fields)){
+                                        print '<td style="text-align:center"><input type="checkbox" checked name="fields[]" value="'.$row['id'].'"></td>';
+                                    } else {
+                                        print '<td style="text-align:center"><input type="checkbox" name="fields[]" value="'.$row['id'].'"></td>';
+                                    }
                                     print '<td style="text-align:center">'.$row['name'].'</td>';
                                     switch($row['type']) {
                                         case 1:
